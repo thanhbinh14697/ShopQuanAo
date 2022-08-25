@@ -1,0 +1,49 @@
+﻿@media screen and (max-width: 1200px) {
+    .like {
+        margin-top: 30px;
+    }
+
+    .cards {
+        width: auto;
+    }
+
+    .img-top {
+        margin-left: 35%;
+    }
+}
+
+@media screen and (max-width: 920px) {
+    .hidden-lg {
+        display: block;
+    }
+
+    .nav-list {
+        display: none !important;
+    }
+
+    .cart {
+        right: 100px;
+    }
+
+    .note {
+        display: none;
+    }
+
+    .sale-discount {
+        display: none;
+    }
+
+    .icon-menu {
+        display: block;
+    }
+
+    .newpr {
+        margin-top: 70px;
+    }
+}
+
+@media screen and (min-width: 920px) {
+    .icon-menu {
+        display: none;
+    }
+}

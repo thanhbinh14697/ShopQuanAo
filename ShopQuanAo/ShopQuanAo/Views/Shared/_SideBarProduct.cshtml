@@ -1,0 +1,21 @@
+﻿@model ShopQuanAo.Models.ProductViewModel
+<!-- Single-product start -->
+@foreach (var item in Model.ListProduct)
+{
+    <div class="single-product col-lg-12">
+        <div class="product-img">
+            <a href="@Url.Action("Index", "ProductDetail", new {productId = item.Id})">
+                <img src="@item.IMAGELINK">
+            </a>
+        </div>
+        <div class="product-info">
+            <h4 class="post-title">
+                <a href="@Url.Action("Index", "ProductDetail", new {productId = item.Id})">@item.NAMEPRODUCT</a>
+            </h4>
+            <p class="hidden-lg"><span class="pro-price product-view"><i class="fa-solid fa-heart"></i> @item.LIKES thích</span></p>
+            <span class="pro-price" style="color: red; font-size: 15px">@item.PRICE Đ</span>
+        </div>
+    </div>
+}
+
+<!-- Single-product end -->

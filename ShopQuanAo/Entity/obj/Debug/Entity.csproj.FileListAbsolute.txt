@@ -1,0 +1,12 @@
+D:\C#\ShopQuanAo\Entity\bin\Debug\Entity.dll.config
+D:\C#\ShopQuanAo\Entity\bin\Debug\Entity.dll
+D:\C#\ShopQuanAo\Entity\bin\Debug\Entity.pdb
+D:\C#\ShopQuanAo\Entity\bin\Debug\EntityFramework.dll
+D:\C#\ShopQuanAo\Entity\bin\Debug\EntityFramework.SqlServer.dll
+D:\C#\ShopQuanAo\Entity\bin\Debug\EntityFramework.xml
+D:\C#\ShopQuanAo\Entity\bin\Debug\EntityFramework.SqlServer.xml
+D:\C#\ShopQuanAo\Entity\obj\Debug\Entity.csproj.AssemblyReference.cache
+D:\C#\ShopQuanAo\Entity\obj\Debug\Entity.csproj.CoreCompileInputs.cache
+D:\C#\ShopQuanAo\Entity\obj\Debug\Entity.csproj.CopyComplete
+D:\C#\ShopQuanAo\Entity\obj\Debug\Entity.dll
+D:\C#\ShopQuanAo\Entity\obj\Debug\Entity.pdb

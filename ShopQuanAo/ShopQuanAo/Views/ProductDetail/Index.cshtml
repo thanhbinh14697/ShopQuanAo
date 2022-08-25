@@ -1,0 +1,525 @@
+﻿@model ShopQuanAo.Models.ProductDetailViewModel
+
+@{
+    ViewBag.Title = "ShopQuanAo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <title>Title</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="~/Content/CSS/Home/index.css">
+    <link rel="stylesheet" href="~/Scripts/fontawesome-free-6.0.0-web/css/all.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/CSS/responsive.css">
+</head>
+
+<body>
+
+
+    <!-- breadcrumb -->
+    <div class="container color-br">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">@Html.ActionLink("Trang Chủ", "Index", "Home")</li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Productcategory", new {idCategory = Model.IDCATEGORY})">@Model.NAMECATEGORY</a></li>
+
+            <li class="breadcrumb-item active" aria-current="page">Chi Tiết</li>
+        </ol>
+    </div>
+    <!--End breadcrumb -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-12">
+                <img class="img_none_detail" src="https://aothudong.com/theme/img/pages/banner-purchase.jpg" style="width: 100%; height: 220px; margin-top: 10px; display:none;">
+                <div id="list-search" class="product-left row">
+                    <div class="row">
+                        <div class="col-lg-6 col-12 product-imgs">
+                            <img src="@Model.IMAGELINK">
+                            <div class="content">
+                                <span class="btnsl btn-prev">
+                                    <i class="fa-solid fa-angle-left"></i>
+                                </span>
+                                <span class="sliders" style="">
+                                    @foreach (var item in Model.ListImage)
+                                    {
+                                        <img src="@item.LINK" alt="">
+                                    }
+
+
+                                </span>
+                                <span class="btnsl btn-next">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12 product-infos">
+                            <div>
+                                <h5><b>@Model.NAMEPRODUCT</b></h5>
+                            </div>
+                            <span>Giá bán:<span class="pro-price" data-value="599000" style="color: #e03550;">@Model.PRICE Đ<span class="lb-small-price">( 650.000 Đ )</span></span></span>
+                            <div class="fix mb-10">
+                                Tình trạng: <b>Còn hàng</b> <span style="padding-left: 6px; color: #ffae3e">(Đã đặt 25)</span>
+                            </div>
+                            <div class="product-description">
+                                <p>
+                                    Bạn cần 1 chiếc áo khoác phao nam đẹp dày dặn, trẻ trung cho thu đông này? @Model.NAMEPRODUCT sẽ là lựa chọn tuyệt vời. Áo thiết kế trẻ trung năng động, với form áo gọn gàng, mũ rộng
+                                    liền thân tiện lợi, 2 túi ngoài rộng có khóa cùng 1 túi trong áo. Áo với lớp ngoài là vải tổng hợp
+                                    trượt nước chắn gió, trong trần bông siêu nhẹ siêu bền, trong lót vải mềm mại ấm áp. Áo có màu đen nam
+                                    tính mạnh mẽ.
+                                </p>
+                            </div>
+                            <div class="panel-policy" style="margin-top: 15px; margin-bottom: 20px;">
+                                <div><b>Chính sách bán hàng:</b> </div>
+                                <div class="color-filter single-pro-color mb-10 clearfix">
+                                    <i class="fa-solid fa-check"></i> Đổi hàng: Trong 5 ngày (<a href="https://aothudong.com/chinh-sach-doi-tra" target="_blank">Chi tiết</a>)
+                                </div>
+                                <div class="color-filter single-pro-color mb-10 clearfix">
+                                    <i class="fa-solid fa-check"></i> Nhận hàng: Kiểm tra trước khi thanh toán
+                                </div>
+                                <div class="color-filter single-pro-color mb-10 clearfix">
+                                    <i class="fa-solid fa-check"></i> Phí vận chuyển: 25,000 - 35,000 VND
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="cart-plus-minus">
+                                    <div class="dec qtybutton ">- <span class="qtybutton1"></span></div>
+                                    <input type="text" value="1" name="qtybutton" class="cart-plus-minus-box">
+                                    <div class="inc qtybutton"><span class="qtybutton2"></span> +</div>
+                                </div>
+
+                                <button onclick="AddCart()" class="btn btn-danger btn-add-cart"><i class="fa-solid fa-cart-arrow-down"></i> Thêm vào giỏ</button>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container vachngan"></div>
+                    <div class="row pro-left-info">
+                        <div class="col-lg-3 left-mess">
+                            <div class="single-pro-tab-menu">
+                                <ul class="">
+                                    <li style="background-color: #e03550;"><a href="#description" data-toggle="tab">Thông tin</a></li>
+                                    <li><a href="https://aothudong.com/huong-dan-dat-hang" target="_blank">Đặt hàng</a></li>
+                                    <li><a href="https://aothudong.com/chinh-sach-cong-tac-vien" target="_blank">Thành viên</a></li>
+                                    <li><a href="https://aothudong.com/chinh-sach-doi-tra" target="_blank">Đổi trả</a></li>
+                                </ul>
+                            </div>
+                            <div class="single-pro-social">
+                                <div class="fb-page fb_iframe_widget" data-href="https://www.facebook.com/aokhoacnamhanoi"
+                                     data-tabs="messages" data-lazy="true" data-small-header="false" data-adapt-container-width="true"
+                                     data-hide-cover="false" data-show-facepile="true" fb-xfbml-state="rendered"
+                                     fb-iframe-plugin-query="adapt_container_width=true&amp;app_id=855246704667441&amp;container_width=190&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Faokhoacnamhanoi&amp;lazy=true&amp;locale=vi_VN&amp;sdk=joey&amp;show_facepile=true&amp;small_header=false&amp;tabs=messages">
+                                    <span style="vertical-align: bottom; width: 190px; height: 500px;">
+                                        <iframe name="f1e912410b2f29"
+                                                width="1000px" height="1000px" data-testid="fb:page Facebook Social Plugin"
+                                                title="fb:page Facebook Social Plugin" frameborder="0" allowtransparency="true"
+                                                allowfullscreen="true" scrolling="no" allow="encrypted-media" loading="lazy"
+                                                src="https://www.facebook.com/v3.2/plugins/page.php?adapt_container_width=true&amp;app_id=855246704667441&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df1a6f7ef3f76c2c%26domain%3Daothudong.com%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Faothudong.com%252Ff1cedf57e691e14%26relation%3Dparent.parent&amp;container_width=190&amp;hide_cover=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Faokhoacnamhanoi&amp;lazy=true&amp;locale=vi_VN&amp;sdk=joey&amp;show_facepile=true&amp;small_header=false&amp;tabs=messages"
+                                                style="border: none; width: 190px; height: 500px; visibility: visible;" class=""></iframe>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="description">
+                                    <div class="pro-tab-info pro-description">
+                                        <h3 class="tab-title title-border mb-30" id="panel-play-review">Clip review sản phẩm</h3>
+                                        <p>
+                                            Để hiểu rõ về sản phẩm <b>Áo khoác nam dáng dài Hàng hiệu (ATD-094)</b> hãy cùng xem qua clip
+                                            review chi tiết sau! Đăng ký kênh <b>Youtube</b> của Shop để nhận thông tin mới nhất nhé.
+                                        </p>
+                                        <div class="mb-30">
+                                            <iframe src="//www.youtube.com/embed/I1IzDxVMkBw" width="100%" height="400" allowfullscreen="allowfullscreen"></iframe>
+                                        </div>
+                                        <h3 class="tab-title title-border mb-30">Thông tin chi tiết</h3>
+                                        <div>
+                                            <table class="table pro-list-info">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Sử dụng</td>
+                                                        <td>Phù hợp <b>0 - 12</b> độ</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Phong cách</td>
+                                                        <td>Trẻ trung Hàn Quốc</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Giới tính</td>
+                                                        <td>@Model.SEX</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Xuất xứ</td>
+                                                        <td>Shop áo thu đông nam</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Chất liệu</td>
+                                                        <td>Vải gió + bông siêu nhẹ</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sản xuất</td>
+                                                        <td>Công nghiệp</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Kích thước</td>
+                                                        <td>M, L, XL, 2XL, 3XL</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Phụ kiện</td>
+                                                        <td>Không</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Cách giặt</td>
+                                                        <td>Có thể giặt máy</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div>
+                                            <p>
+                                                Hôm nay Aothudong xin giới thiệu đến các bạn mẫu Áo khoác nam dáng dài Hàng hiệu mã số ATD-094,
+                                                đây là 1 trong những mẫu áo phao cao cấp tại Aothudong. Áo được thiết kế trẻ trung sang trọng
+                                                mang đến sự sang chảnh cho người mặc, áo khoác phao dáng dài đang được các bạn trẻ săn đón nhiều
+                                                hiện nay.
+                                            </p>
+                                            <p>
+                                                Áo với lớp bên ngoài được làm từ vải gió tổng hợp cao cấp có khả năng chống thấm và chống gió
+                                                cực tốt, kết kợp lõi từ bông siêu nhẹ giúp giữ ấm cho cơ thể. Sản phẩm có đường may tinh tế,
+                                                chắc chắn, khóa chính là từ hợp kim không rỉ cao cấp tạo nên sự sang trọng cho sản phẩm. Các chi
+                                                tiết trên áo được gia công tinh xảo thể hiện chất lượng cao cấp cho sản phẩm. Áo có màu đen nam
+                                                tính mạnh mẽ đang được nhiều bạn trẻ yêu thích. Áo có mũ lông chùm có thể thao rời rất tiện lợi,
+                                                có thể che mưa hoặc thao gọn gàng.
+                                            </p>
+                                            <p>
+                                                Hãy cùng chúng tôi chiêm ngưỡng sản phẩm qua 1 số hình ảnh sau và liên hệ ngay để nhận được tư
+                                                vấn đặt hàng miễn phí nhé !!!
+                                            </p>
+                                            @foreach (var item in Model.ListImage)
+                                            {
+                                                <p class="text-center">
+                                                    <img src="@item.LINK"
+                                                         alt="Áo khoác nam dáng dài Hàng hiệu - Ảnh đại diện">
+                                                </p>
+                                            }
+
+
+                                        </div>
+                                        <div class="mt-30 clearfix">
+                                            <h5 class="fs-16px"><b>Chúng tôi cam kết:</b></h5>
+                                            <div>
+                                                <p class="text-center">
+                                                    <img src="https://aothudong.com/theme/img/pages/cam-ket.png" class="img-commission">
+                                                </p>
+                                                <p>Mọi vấn đề thắc mắc về chính sách của chúng tôi, bạn có thể gửi yêu cầu qua email <b><a href="mailto:admin@aothudong.com">admin@aothudong.com</a></b> hoặc gọi điện theo số hotline <b><a href="tel:0854192429">085.419.2429</a></b>.</p>
+                                            </div>
+                                        </div>
+                                        <div class="post-share-tag clearfix mt-20">
+                                            <div class="post-share post-tag floatleft">
+                                                <span class="text-uppercase"><strong>Tags</strong></span>
+                                                <a href="https://aothudong.com/san-pham/noi-bat/ao-khoac.html">áo khoác</a>,
+                                                <a href="https://aothudong.com/san-pham/noi-bat/ao-khoac-nam.html">áo khoác nam</a>,
+                                                <a href="https://aothudong.com/san-pham/noi-bat/ao-khoac-phao.html">áo khoác phao</a>,
+                                                <a href="https://aothudong.com/san-pham/noi-bat/ao-khoac-phao-dai.html">áo khoác phao dài</a>,
+                                                <a href="https://aothudong.com/san-pham/noi-bat/ao-khoac-phao-nam-dai.html">
+                                                    áo khoác phao nam
+                                                    dài
+                                                </a>,
+                                                <a href="https://aothudong.com/san-pham/noi-bat/ao-phao-nam-dang-dai-han-quoc.html">
+                                                    áo phao nam
+                                                    dáng dài Hàn Quốc
+                                                </a>,
+                                                <a href="https://aothudong.com/san-pham/noi-bat/ao-khoac-nam-ha-noi.html">
+                                                    áo khoác nam Hà
+                                                    Nội
+                                                </a>,
+                                                <a href="https://aothudong.com/san-pham/noi-bat/ao-khoac-nam-cao-cap.html">
+                                                    áo khoác nam cao
+                                                    cấp
+                                                </a>,
+                                                <a href="https://aothudong.com/san-pham/noi-bat/ao-khoac-hang-hieu.html">áo khoác hàng hiệu</a>,
+                                                <a href="https://aothudong.com/san-pham/noi-bat/ao-phao-co-mu.html">áo phao có mũ</a>,
+                                                <a href="https://aothudong.com/san-pham/noi-bat/ao-phao-dang-dai-co-mu.html">
+                                                    áo phao dáng dài có
+                                                    mũ
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="pro-reviews mt-40">
+                                            <div class="leave-review">
+                                                <div class="cmt-list">
+                                                    <div class="kengang"></div>
+                                                    <div class="cmt-top">
+                                                        <h6><b>11858 Phản hồi</b></h6>
+                                                        <a class="cmt-sort" href="https://www.messenger.com/t/aokhoacnamhanoi" target="_blank"
+                                                           rel="nofollow"><i class="fa-solid fa-pencil"></i><b>Viết phản hồi</b></a>
+                                                    </div>
+                                                    <div class="kengang" style="margin-top: 5px;"></div>
+                                                    <div class="cmt-item">
+                                                        <div class="cmt-avatar">
+                                                            <img src="https://aothudong.com/img/avatars/1/9.jpg" class="cmt-img"
+                                                                 alt="Nhận xét khách hàng Hương Ly">
+                                                        </div>
+                                                        <div class="cmt-content">
+                                                            <div class="cmt-name">
+                                                                <a href="#">Hương Ly</a>
+                                                            </div>
+                                                            <div class="cmt-question">Cách bài trí web rất dể hiểu, dễ lựa chọn sản phẩm.</div>
+                                                            <div class="cmt-bottom">
+                                                                <i style="color: #e03550;" class="fa-solid fa-heart"></i>
+                                                                · <a href="https://www.messenger.com/t/aokhoacnamhanoi" target="_blank"
+                                                                     rel="nofollow">Phản hồi</a>
+                                                                · 0 giờ
+                                                            </div>
+                                                        </div>
+                                                        <div class="shop-cmt">
+                                                            <div class="shop-cmt-logo">
+                                                                <img src="https://aothudong.com/theme/aothudong/img/logo_fb.png" class="shop-cmt-img"
+                                                                     alt="Áo khoác nam, áo thu đông cao cấp tại Hà Nội">
+                                                            </div>
+                                                            <div class="cmt-content">
+                                                                <div class="cmt-name">
+                                                                    <a href="https://www.facebook.com/aokhoacnamhanoi" target="_blank" rel="nofollow">
+                                                                        Áo
+                                                                        khoác nam, áo thu đông cao cấp tại Hà Nội
+                                                                    </a>
+                                                                </div>
+                                                                <div class="comment-question">
+                                                                    Cảm ơn bạn nhiều ạ. Hãy tiếp tục ủng hộ shop nhé!
+                                                                </div>
+                                                                <div class="cmt-bottom">
+                                                                    <i style="color: #e03550;" class="fa-solid fa-heart"></i>
+                                                                    · <a href="https://www.messenger.com/t/aokhoacnamhanoi" target="_blank"
+                                                                         rel="nofollow">Phản hồi</a>
+                                                                    · 2 giờ
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="cmt-item">
+                                                        <div class="cmt-avatar">
+                                                            <img src="https://aothudong.com/img/avatars/2/9.jpg" class="cmt-img"
+                                                                 alt="Nhận xét khách hàng Nguyễn Phương">
+                                                        </div>
+                                                        <div class="cmt-content">
+                                                            <div class="cmt-name">
+                                                                <a href="#">Nguyễn Phương</a>
+                                                            </div>
+                                                            <div class="cmt-question">
+                                                                Mình đã sử dụng dịch vụ bên bạn. Đúng là rất chuẩn chất lượng tốt- giá tốt- dịch vụ tốt.
+                                                                Chúc shop mua may bán đắt.
+                                                            </div>
+                                                            <div class="cmt-bottom">
+                                                                <i style="color: #e03550;" class="fa-solid fa-heart"></i>
+                                                                · <a href="https://www.messenger.com/t/aokhoacnamhanoi" target="_blank"
+                                                                     rel="nofollow">Phản hồi</a>
+                                                                · 1 giờ
+                                                            </div>
+                                                        </div>
+                                                        <div class="shop-cmt">
+                                                            <div class="shop-cmt-logo">
+                                                                <img src="https://aothudong.com/theme/aothudong/img/logo_fb.png" class="shop-cmt-img"
+                                                                     alt="Áo khoác nam, áo thu đông cao cấp tại Hà Nội">
+                                                            </div>
+                                                            <div class="cmt-content">
+                                                                <div class="cmt-name">
+                                                                    <a href="https://www.facebook.com/aokhoacnamhanoi" target="_blank" rel="nofollow">
+                                                                        Áo
+                                                                        khoác nam, áo thu đông cao cấp tại Hà Nội
+                                                                    </a>
+                                                                </div>
+                                                                <div class="comment-question">
+                                                                    Cảm ơn nhận xét của bạn, shop còn cần cố gắng hơn nữa ạ. Rất vui khi được phục vụ bạn
+                                                                    ạ.
+                                                                </div>
+                                                                <div class="cmt-bottom">
+                                                                    <i style="color: #e03550;" class="fa-solid fa-heart"></i>
+                                                                    · <a href="https://www.messenger.com/t/aokhoacnamhanoi" target="_blank"
+                                                                         rel="nofollow">Phản hồi</a>
+                                                                    · 3 giờ
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="cmt-item">
+                                                        <div class="cmt-avatar">
+                                                            <img src="https://aothudong.com/img/avatars/6/3.jpg" class="cmt-img"
+                                                                 alt="Nhận xét khách hàng Hòa Zalo me">
+                                                        </div>
+                                                        <div class="cmt-content">
+                                                            <div class="cmt-name">
+                                                                <a href="#">Hòa Zalo me</a>
+                                                            </div>
+                                                            <div class="cmt-question">
+                                                                Áo của bên shop giặt máy được không ạ?
+                                                            </div>
+                                                            <div class="cmt-bottom">
+                                                                <i style="color: #e03550;" class="fa-solid fa-heart"></i>
+                                                                · <a href="https://www.messenger.com/t/aokhoacnamhanoi" target="_blank"
+                                                                     rel="nofollow">Phản hồi</a>
+                                                                · 2 giờ
+                                                            </div>
+                                                        </div>
+                                                        <div class="shop-cmt">
+                                                            <div class="shop-cmt-logo">
+                                                                <img src="https://aothudong.com/theme/aothudong/img/logo_fb.png" class="shop-cmt-img"
+                                                                     alt="Áo khoác nam, áo thu đông cao cấp tại Hà Nội">
+                                                            </div>
+                                                            <div class="cmt-content">
+                                                                <div class="cmt-name">
+                                                                    <a href="https://www.facebook.com/aokhoacnamhanoi" target="_blank" rel="nofollow">
+                                                                        Áo
+                                                                        khoác nam, áo thu đông cao cấp tại Hà Nội
+                                                                    </a>
+                                                                </div>
+                                                                <div class="comment-question">
+                                                                    Dạ, với các loại áo hiện nay đều có thể giặt máy bạn ạ. Bạn có thể inbox để bên mình
+                                                                    tư vấn thêm nhé.
+                                                                </div>
+                                                                <div class="cmt-bottom">
+                                                                    <i style="color: #e03550;" class="fa-solid fa-heart"></i>
+                                                                    · <a href="https://www.messenger.com/t/aokhoacnamhanoi" target="_blank"
+                                                                         rel="nofollow">Phản hồi</a>
+                                                                    · 4 giờ
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="cmt-item">
+                                                        <div class="cmt-avatar">
+                                                            <img src="https://aothudong.com/img/avatars/5/9.jpg" class="cmt-img"
+                                                                 alt="Nhận xét khách hàng Ng Đình Tư">
+                                                        </div>
+                                                        <div class="cmt-content">
+                                                            <div class="cmt-name">
+                                                                <a href="#">Ng Đình Tư</a>
+                                                            </div>
+                                                            <div class="cmt-question">
+                                                                Nếu nhận hàng mà mình muốn đổi lại hàng thì phải làm thế nào ạ?
+                                                            </div>
+                                                            <div class="cmt-bottom">
+                                                                <i style="color: #e03550;" class="fa-solid fa-heart"></i>
+                                                                · <a href="https://www.messenger.com/t/aokhoacnamhanoi" target="_blank"
+                                                                     rel="nofollow">Phản hồi</a>
+                                                                · 4 giờ
+                                                            </div>
+                                                        </div>
+                                                        <div class="shop-cmt">
+                                                            <div class="shop-cmt-logo">
+                                                                <img src="https://aothudong.com/theme/aothudong/img/logo_fb.png" class="shop-cmt-img"
+                                                                     alt="Áo khoác nam, áo thu đông cao cấp tại Hà Nội">
+                                                            </div>
+                                                            <div class="cmt-content">
+                                                                <div class="cmt-name">
+                                                                    <a href="https://www.facebook.com/aokhoacnamhanoi" target="_blank" rel="nofollow">
+                                                                        Áo
+                                                                        khoác nam, áo thu đông cao cấp tại Hà Nội
+                                                                    </a>
+                                                                </div>
+                                                                <div class="comment-question">
+                                                                    Khi nhận được hàng mà bạn muốn đổi hàng. Bạn cần giữ nguyên tình trạng của áo, không
+                                                                    xé mác, không giặt áo. Sau đó báo với shop trong vòng 7 ngày kể từ khi nhận sản phẩm.
+                                                                    Shop sẽ hướng dẫn bạn cụ thể từng trường hợp nhé.
+                                                                </div>
+                                                                <div class="cmt-bottom">
+                                                                    <i style="color: #e03550;" class="fa-solid fa-heart"></i>
+                                                                    · <a href="https://www.messenger.com/t/aokhoacnamhanoi" target="_blank"
+                                                                         rel="nofollow">Phản hồi</a>
+                                                                    · 5 giờ
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="cmt-item">
+                                                        <div class="cmt-avatar">
+                                                            <img src="https://aothudong.com/img/avatars/4/10.jpg" class="cmt-img"
+                                                                 alt="Nhận xét khách hàng Quý Mạnh">
+                                                        </div>
+                                                        <div class="cmt-content">
+                                                            <div class="cmt-name">
+                                                                <a href="#">Quý Mạnh</a>
+                                                            </div>
+                                                            <div class="cmt-question">
+                                                                Mình muốn đặt hàng, không biết thanh toán thế nào vậy nhỉ?
+                                                            </div>
+                                                            <div class="cmt-bottom">
+                                                                <i style="color: #e03550;" class="fa-solid fa-heart"></i>
+                                                                · <a href="https://www.messenger.com/t/aokhoacnamhanoi" target="_blank"
+                                                                     rel="nofollow">Phản hồi</a>
+                                                                · 6 giờ
+                                                            </div>
+                                                        </div>
+                                                        <div class="shop-cmt">
+                                                            <div class="shop-cmt-logo">
+                                                                <img src="https://aothudong.com/theme/aothudong/img/logo_fb.png" class="shop-cmt-img"
+                                                                     alt="Áo khoác nam, áo thu đông cao cấp tại Hà Nội">
+                                                            </div>
+                                                            <div class="cmt-content">
+                                                                <div class="cmt-name">
+                                                                    <a href="https://www.facebook.com/aokhoacnamhanoi" target="_blank" rel="nofollow">
+                                                                        Áo
+                                                                        khoác nam, áo thu đông cao cấp tại Hà Nội
+                                                                    </a>
+                                                                </div>
+                                                                <div class="comment-question">
+                                                                    Cảm ơn câu hỏi của bạn, bạn có thể thanh toán khi nhận sản phẩm hoặc có thể chuyển
+                                                                    khoản cho bên mình. Hình thức thanh toán, bạn có thể tham khảo trong mục hướng dẫn đặt
+                                                                    hàng của bên mình, hoặc bạn có thể check inbox, bên mình sẽ gửi hướng dẫn ạ.
+                                                                </div>
+                                                                <div class="cmt-bottom">
+                                                                    <i style="color: #e03550;" class="fa-solid fa-heart"></i>
+                                                                    · <a href="https://www.messenger.com/t/aokhoacnamhanoi" target="_blank"
+                                                                         rel="nofollow">Phản hồi</a>
+                                                                    · 6 giờ
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="reply-box mb-30">
+                                                        <div class="kengang"></div>
+                                                        <div class="text-center mt-30 cmt-top">
+                                                            <h3 class="mt-15">BÌNH LUẬN BÊN DƯỚI ĐỂ ĐẶT HÀNG</h3>
+                                                            <p>
+                                                                (Vui lòng để lại <b style="color: red">Mã sản phẩm + Tên + Số điện thoại</b> để đặt
+                                                                hàng. Chúng tôi sẽ gọi lại cho Quý vị)
+                                                            </p>
+                                                        </div>
+                                                        <div class="kengang"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @{
+                Html.RenderAction("RenderMenu", "ProductDetail");
+            }
+        </div>
+    </div>
+
+    <input class="hidden" id="urlSearch" value="@Url.Action("Search","ProductCategory")" style="display: none" />
+    <input class="hidden" id="urlAdd" value="@Url.Action("ThemVaoGio","Cart",new { sanPhamID = Model.IDPRODUCT, IDUser = Session["idUser"] })" style="display: none" />
+    <input class="hidden" id="idProduct" value="@Model.IDPRODUCT" style="display: none" />
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="~/Content/JS/ProductDetail/JavaScript.js"></script>
+</body>
+
+

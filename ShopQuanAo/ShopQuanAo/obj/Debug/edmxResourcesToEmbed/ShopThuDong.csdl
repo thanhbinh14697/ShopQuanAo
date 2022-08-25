@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShopQuanAoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SDT" Type="Int32" />
+    <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TYPE" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Carts" Relationship="Self.FK__Cart__IDACC__31EC6D26" FromRole="Account" ToRole="Cart" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDACC" Type="Int32" />
+    <Property Name="DATECREATED" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DIACHI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SIZESP" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="STATUSS" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="Self.FK__Cart__IDACC__31EC6D26" FromRole="Cart" ToRole="Account" />
+    <NavigationProperty Name="CartInfoes" Relationship="Self.FK__CartInfo__IDCART__34C8D9D1" FromRole="Cart" ToRole="CartInfo" />
+  </EntityType>
+  <EntityType Name="CartInfo">
+    <Key>
+      <PropertyRef Name="IDCARTINFO" />
+    </Key>
+    <Property Name="IDCARTINFO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDCART" Type="Int32" />
+    <Property Name="IDPRODUCT" Type="Int32" />
+    <Property Name="SOLUONG" Type="Int32" />
+    <Property Name="MESSAGER" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Cart" Relationship="Self.FK__CartInfo__IDCART__34C8D9D1" FromRole="CartInfo" ToRole="Cart" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__CartInfo__IDPROD__35BCFE0A" FromRole="CartInfo" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="ImageProduct">
+    <Key>
+      <PropertyRef Name="IDIMAGE" />
+    </Key>
+    <Property Name="IDIMAGE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDPRODUCT" Type="Int32" />
+    <Property Name="LINK" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__ImageProd__IDPRO__2D27B809" FromRole="ImageProduct" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="IDPRODUCT" />
+    </Key>
+    <Property Name="IDPRODUCT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAMEPRODUCT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PRICE" Type="Int32" />
+    <Property Name="RRICESALE" Type="Int32" />
+    <Property Name="STATUSS" Type="Boolean" />
+    <Property Name="SEX" Type="Boolean" />
+    <Property Name="DESCRIPTIONS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IMAGELINK" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IDCATEGORY" Type="Int32" />
+    <Property Name="LIKES" Type="Int32" />
+    <NavigationProperty Name="CartInfoes" Relationship="Self.FK__CartInfo__IDPROD__35BCFE0A" FromRole="Product" ToRole="CartInfo" />
+    <NavigationProperty Name="ImageProducts" Relationship="Self.FK__ImageProd__IDPRO__2D27B809" FromRole="Product" ToRole="ImageProduct" />
+    <NavigationProperty Name="ProductCategory" Relationship="Self.FK__Product__IDCATEG__2A4B4B5E" FromRole="Product" ToRole="ProductCategory" />
+  </EntityType>
+  <EntityType Name="ProductCategory">
+    <Key>
+      <PropertyRef Name="IDCATEGORY" />
+    </Key>
+    <Property Name="IDCATEGORY" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAMECATEGORY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Product__IDCATEG__2A4B4B5E" FromRole="ProductCategory" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK__Cart__IDACC__31EC6D26">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="IDACC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CartInfo__IDCART__34C8D9D1">
+    <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+    <End Role="CartInfo" Type="Self.CartInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cart">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CartInfo">
+        <PropertyRef Name="IDCART" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CartInfo__IDPROD__35BCFE0A">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="CartInfo" Type="Self.CartInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="IDPRODUCT" />
+      </Principal>
+      <Dependent Role="CartInfo">
+        <PropertyRef Name="IDPRODUCT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ImageProd__IDPRO__2D27B809">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="ImageProduct" Type="Self.ImageProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="IDPRODUCT" />
+      </Principal>
+      <Dependent Role="ImageProduct">
+        <PropertyRef Name="IDPRODUCT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__IDCATEG__2A4B4B5E">
+    <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductCategory">
+        <PropertyRef Name="IDCATEGORY" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="IDCATEGORY" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ShopQuanAoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Carts" EntityType="Self.Cart" />
+    <EntitySet Name="CartInfoes" EntityType="Self.CartInfo" />
+    <EntitySet Name="ImageProducts" EntityType="Self.ImageProduct" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK__Cart__IDACC__31EC6D26" Association="Self.FK__Cart__IDACC__31EC6D26">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Cart" EntitySet="Carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CartInfo__IDCART__34C8D9D1" Association="Self.FK__CartInfo__IDCART__34C8D9D1">
+      <End Role="Cart" EntitySet="Carts" />
+      <End Role="CartInfo" EntitySet="CartInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CartInfo__IDPROD__35BCFE0A" Association="Self.FK__CartInfo__IDPROD__35BCFE0A">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="CartInfo" EntitySet="CartInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ImageProd__IDPRO__2D27B809" Association="Self.FK__ImageProd__IDPRO__2D27B809">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ImageProduct" EntitySet="ImageProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__IDCATEG__2A4B4B5E" Association="Self.FK__Product__IDCATEG__2A4B4B5E">
+      <End Role="ProductCategory" EntitySet="ProductCategories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

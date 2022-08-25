@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ShopQuanAoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SDT" Type="int" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TYPE" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDACC" Type="int" />
+          <Property Name="DATECREATED" Type="date" Nullable="false" />
+          <Property Name="DIACHI" Type="nvarchar" MaxLength="50" />
+          <Property Name="SIZESP" Type="varchar" MaxLength="5" />
+          <Property Name="STATUSS" Type="int" Nullable="false" />
+          <Property Name="IdProducrt" Type="int" />
+          <Property Name="SoLuong" Type="int" />
+        </EntityType>
+        <EntityType Name="CartInfo">
+          <Key>
+            <PropertyRef Name="IDCARTINFO" />
+          </Key>
+          <Property Name="IDCARTINFO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCART" Type="int" />
+          <Property Name="IDPRODUCT" Type="int" />
+          <Property Name="SOLUONG" Type="int" />
+          <Property Name="MESSAGER" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ImageProduct">
+          <Key>
+            <PropertyRef Name="IDIMAGE" />
+          </Key>
+          <Property Name="IDIMAGE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPRODUCT" Type="int" />
+          <Property Name="LINK" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="IDPRODUCT" />
+          </Key>
+          <Property Name="IDPRODUCT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAMEPRODUCT" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PRICE" Type="int" />
+          <Property Name="RRICESALE" Type="int" />
+          <Property Name="STATUSS" Type="bit" />
+          <Property Name="SEX" Type="bit" />
+          <Property Name="DESCRIPTIONS" Type="nvarchar(max)" />
+          <Property Name="IMAGELINK" Type="nvarchar" MaxLength="100" />
+          <Property Name="IDCATEGORY" Type="int" />
+          <Property Name="LIKES" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="IDCATEGORY" />
+          </Key>
+          <Property Name="IDCATEGORY" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAMECATEGORY" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__Cart__IDACC__31EC6D26">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="IDACC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartInfo__IDCART__34C8D9D1">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="CartInfo" Type="Self.CartInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CartInfo">
+              <PropertyRef Name="IDCART" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartInfo__IDPROD__35BCFE0A">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="CartInfo" Type="Self.CartInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDPRODUCT" />
+            </Principal>
+            <Dependent Role="CartInfo">
+              <PropertyRef Name="IDPRODUCT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ImageProd__IDPRO__2D27B809">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ImageProduct" Type="Self.ImageProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDPRODUCT" />
+            </Principal>
+            <Dependent Role="ImageProduct">
+              <PropertyRef Name="IDPRODUCT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IDCATEG__2A4B4B5E">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="IDCATEGORY" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDCATEGORY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShopQuanAoModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartInfo" EntityType="Self.CartInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImageProduct" EntityType="Self.ImageProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cart__IDACC__31EC6D26" Association="Self.FK__Cart__IDACC__31EC6D26">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartInfo__IDCART__34C8D9D1" Association="Self.FK__CartInfo__IDCART__34C8D9D1">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="CartInfo" EntitySet="CartInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartInfo__IDPROD__35BCFE0A" Association="Self.FK__CartInfo__IDPROD__35BCFE0A">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CartInfo" EntitySet="CartInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ImageProd__IDPRO__2D27B809" Association="Self.FK__ImageProd__IDPRO__2D27B809">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ImageProduct" EntitySet="ImageProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IDCATEG__2A4B4B5E" Association="Self.FK__Product__IDCATEG__2A4B4B5E">
+            <End Role="ProductCategory" EntitySet="ProductCategory" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ShopQuanAoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SDT" Type="Int32" />
+          <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TYPE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Carts" Relationship="ShopQuanAoModel.FK__Cart__IDACC__31EC6D26" FromRole="Account" ToRole="Cart" />
+        </EntityType>
+        <EntityType Name="CartInfo">
+          <Key>
+            <PropertyRef Name="IDCARTINFO" />
+          </Key>
+          <Property Name="IDCARTINFO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCART" Type="Int32" />
+          <Property Name="IDPRODUCT" Type="Int32" />
+          <Property Name="SOLUONG" Type="Int32" />
+          <Property Name="MESSAGER" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__CartInfo__IDPROD__35BCFE0A" FromRole="CartInfo" ToRole="Product" />
+          <NavigationProperty Name="Cart" Relationship="ShopQuanAoModel.FK__CartInfo__IDCART__34C8D9D1" FromRole="CartInfo" ToRole="Cart" />
+        </EntityType>
+        <EntityType Name="ImageProduct">
+          <Key>
+            <PropertyRef Name="IDIMAGE" />
+          </Key>
+          <Property Name="IDIMAGE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDPRODUCT" Type="Int32" />
+          <Property Name="LINK" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__ImageProd__IDPRO__2D27B809" FromRole="ImageProduct" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="IDPRODUCT" />
+          </Key>
+          <Property Name="IDPRODUCT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAMEPRODUCT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PRICE" Type="Int32" />
+          <Property Name="RRICESALE" Type="Int32" />
+          <Property Name="STATUSS" Type="Boolean" />
+          <Property Name="SEX" Type="Boolean" />
+          <Property Name="DESCRIPTIONS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IMAGELINK" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IDCATEGORY" Type="Int32" />
+          <Property Name="LIKES" Type="Int32" />
+          <NavigationProperty Name="CartInfoes" Relationship="Self.FK__CartInfo__IDPROD__35BCFE0A" FromRole="Product" ToRole="CartInfo" />
+          <NavigationProperty Name="ImageProducts" Relationship="Self.FK__ImageProd__IDPRO__2D27B809" FromRole="Product" ToRole="ImageProduct" />
+          <NavigationProperty Name="ProductCategory" Relationship="Self.FK__Product__IDCATEG__2A4B4B5E" FromRole="Product" ToRole="ProductCategory" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="IDCATEGORY" />
+          </Key>
+          <Property Name="IDCATEGORY" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAMECATEGORY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__IDCATEG__2A4B4B5E" FromRole="ProductCategory" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__CartInfo__IDPROD__35BCFE0A">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="CartInfo" Type="Self.CartInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDPRODUCT" />
+            </Principal>
+            <Dependent Role="CartInfo">
+              <PropertyRef Name="IDPRODUCT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ImageProd__IDPRO__2D27B809">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ImageProduct" Type="Self.ImageProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDPRODUCT" />
+            </Principal>
+            <Dependent Role="ImageProduct">
+              <PropertyRef Name="IDPRODUCT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IDCATEG__2A4B4B5E">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="IDCATEGORY" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDCATEGORY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShopQuanAoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="CartInfoes" EntityType="Self.CartInfo" />
+          <EntitySet Name="ImageProducts" EntityType="Self.ImageProduct" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK__CartInfo__IDPROD__35BCFE0A" Association="Self.FK__CartInfo__IDPROD__35BCFE0A">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="CartInfo" EntitySet="CartInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ImageProd__IDPRO__2D27B809" Association="Self.FK__ImageProd__IDPRO__2D27B809">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ImageProduct" EntitySet="ImageProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IDCATEG__2A4B4B5E" Association="Self.FK__Product__IDCATEG__2A4B4B5E">
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <EntitySet Name="Carts" EntityType="ShopQuanAoModel.Cart" />
+          <AssociationSet Name="FK__Cart__IDACC__31EC6D26" Association="ShopQuanAoModel.FK__Cart__IDACC__31EC6D26">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartInfo__IDCART__34C8D9D1" Association="ShopQuanAoModel.FK__CartInfo__IDCART__34C8D9D1">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="CartInfo" EntitySet="CartInfoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDACC" Type="Int32" />
+          <Property Name="DATECREATED" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DIACHI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SIZESP" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="STATUSS" Type="Int32" Nullable="false" />
+          <Property Name="IdProducrt" Type="Int32" />
+          <Property Name="SoLuong" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="ShopQuanAoModel.FK__Cart__IDACC__31EC6D26" FromRole="Cart" ToRole="Account" />
+          <NavigationProperty Name="CartInfoes" Relationship="ShopQuanAoModel.FK__CartInfo__IDCART__34C8D9D1" FromRole="Cart" ToRole="CartInfo" />
+        </EntityType>
+        <Association Name="FK__Cart__IDACC__31EC6D26">
+          <End Type="ShopQuanAoModel.Account" Role="Account" Multiplicity="0..1" />
+          <End Type="ShopQuanAoModel.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="IDACC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartInfo__IDCART__34C8D9D1">
+          <End Type="ShopQuanAoModel.Cart" Role="Cart" Multiplicity="0..1" />
+          <End Type="ShopQuanAoModel.CartInfo" Role="CartInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CartInfo">
+              <PropertyRef Name="IDCART" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ShopQuanAoModelStoreContainer" CdmEntityContainer="ShopQuanAoEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="ShopQuanAoModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartInfoes">
+            <EntityTypeMapping TypeName="ShopQuanAoModel.CartInfo">
+              <MappingFragment StoreEntitySet="CartInfo">
+                <ScalarProperty Name="IDCARTINFO" ColumnName="IDCARTINFO" />
+                <ScalarProperty Name="IDCART" ColumnName="IDCART" />
+                <ScalarProperty Name="IDPRODUCT" ColumnName="IDPRODUCT" />
+                <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
+                <ScalarProperty Name="MESSAGER" ColumnName="MESSAGER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImageProducts">
+            <EntityTypeMapping TypeName="ShopQuanAoModel.ImageProduct">
+              <MappingFragment StoreEntitySet="ImageProduct">
+                <ScalarProperty Name="IDIMAGE" ColumnName="IDIMAGE" />
+                <ScalarProperty Name="IDPRODUCT" ColumnName="IDPRODUCT" />
+                <ScalarProperty Name="LINK" ColumnName="LINK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="ShopQuanAoModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="IDPRODUCT" ColumnName="IDPRODUCT" />
+                <ScalarProperty Name="NAMEPRODUCT" ColumnName="NAMEPRODUCT" />
+                <ScalarProperty Name="PRICE" ColumnName="PRICE" />
+                <ScalarProperty Name="RRICESALE" ColumnName="RRICESALE" />
+                <ScalarProperty Name="STATUSS" ColumnName="STATUSS" />
+                <ScalarProperty Name="SEX" ColumnName="SEX" />
+                <ScalarProperty Name="DESCRIPTIONS" ColumnName="DESCRIPTIONS" />
+                <ScalarProperty Name="IMAGELINK" ColumnName="IMAGELINK" />
+                <ScalarProperty Name="IDCATEGORY" ColumnName="IDCATEGORY" />
+                <ScalarProperty Name="LIKES" ColumnName="LIKES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategories">
+            <EntityTypeMapping TypeName="ShopQuanAoModel.ProductCategory">
+              <MappingFragment StoreEntitySet="ProductCategory">
+                <ScalarProperty Name="IDCATEGORY" ColumnName="IDCATEGORY" />
+                <ScalarProperty Name="NAMECATEGORY" ColumnName="NAMECATEGORY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ShopQuanAoModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="ShopQuanAoModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="IdProducrt" ColumnName="IdProducrt" />
+                <ScalarProperty Name="STATUSS" ColumnName="STATUSS" />
+                <ScalarProperty Name="SIZESP" ColumnName="SIZESP" />
+                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+                <ScalarProperty Name="DATECREATED" ColumnName="DATECREATED" />
+                <ScalarProperty Name="IDACC" ColumnName="IDACC" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

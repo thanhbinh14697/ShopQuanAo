@@ -1,0 +1,150 @@
+﻿@model List<ShopQuanAo.Models.ProductCategoryDto>
+<!-- Menu Responsive -->
+<div class="menu">
+    <div class="menu-header">
+        <nav class="navbar">
+            <a class="navbar-brand" href="#">
+                Menu
+            </a>
+            <i class="fa-solid fa-arrow-left" style="font-size: 20px; margin-right: 10px;"></i>
+        </nav>
+    </div>
+    <div class="menu-body">
+        <span>
+            <a class="menu-titel" href="#">Trang chủ</a>
+            <div class="dropdown-divider"></div>
+        </span>
+        <div>
+            <span><a class="menu-titel" href="">Sản phẩm</a></span>
+            @{
+                int colSize = 3;
+                int numCol = Model.Count / colSize;
+                if (Model.Count % colSize > 0) { numCol++; }
+
+            }
+            @for (int i = 0; i < numCol; i++)
+            {
+                var lstColData = Model.Skip(i * colSize).Take(colSize);
+                <ul class="list-gr">
+                    <div class="dropdown-divider"></div>
+                    <li class="list-gr-item list-gr-item-header "> <a>Áo khoác mỏng</a></li>
+                    @foreach (var cate in lstColData)
+                    {
+                        <div class="dropdown-divider"></div>
+                        <li class="list-gr-item"> <a href="@Url.Action("Index","ProductCategory", new {idCategory = cate.id})">@cate.name</a></li>
+                    }
+                </ul>
+            }
+
+           
+        </div>
+        <div class="dropdown-divider"></div>
+        <span class="menu-titel">Khuyến mãi</span>
+        <div>
+            <div class="dropdown-divider"></div>
+            <span class="menu-titel">Kiến Thức</span>
+            <ul class="list-gr">
+                <div class="dropdown-divider"></div>
+                <li class="list-gr-item"> <a>Áo khoác mỏng</a></li>
+                <div class="dropdown-divider"></div>
+                <li class="list-gr-item"> <a>Áo chống nắng nam</a></li>
+                <div class="dropdown-divider"></div>
+                <li class="list-gr-item"> <a>Áo khoác gió nam</a></li>
+                <div class="dropdown-divider"></div>
+                <li class="list-gr-item"> <a>Áo khoác gió nam</a></li>
+                <div class="dropdown-divider"></div>
+
+            </ul>
+        </div>
+        <div class="dropdown-divider"></div>
+        <span class="menu-titel">Góc review</span>
+        <div>
+            <div class="dropdown-divider"></div>
+            <span class="menu-titel">Giới thiệu</span>
+            <ul class="list-gr">
+                <div class="dropdown-divider"></div>
+                <li class="list-gr-item"> <a>Áo khoác mỏng</a></li>
+                <div class="dropdown-divider"></div>
+                <li class="list-gr-item"> <a>Áo chống nắng nam</a></li>
+                <div class="dropdown-divider"></div>
+                <li class="list-gr-item"> <a>Áo khoác gió nam</a></li>
+                <div class="dropdown-divider"></div>
+                <li class="list-gr-item"> <a>Áo khoác gió nam</a></li>
+                <div class="dropdown-divider"></div>
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Menu Responsive -->
+<!-- Header -->
+<div class=" header-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <nav class="navbar">
+                    <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                        <img class="img-dc" src="https://aothudong.com/theme/aothudong/img/logo.png">
+                    </a>
+                </nav>
+            </div>
+            <i class="fa-solid fa-bars icon-menu"></i>
+            <a class="cart" href="@Url.Action("Index", "Cart", new {idUser = Session["idUser"]})">
+                <i class="fa-solid fa-cart-shopping" style="cursor: pointer;">
+                    <span class="cart-num">1</span>
+                </i>
+            </a>
+            <div class="col-md-9 nav-list">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><b>TRANG CHỦ</b></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#"><b>SẢN PHẨM</b></a>
+                        <div class="dropdown-content">
+                            @for (int i = 0; i < numCol; i++){
+
+                                        var listColData = Model.Skip(i * colSize).Take(colSize);
+                            <div>
+                                <a class="dropdown-item item-title" href="#"><b>Áo Khoác Mỏng</b></a>
+                                <div class="dropdown-divider"></div>
+                                @foreach (var item in listColData)
+                                {
+                                    <a class="dropdown-item" href="@Url.Action("Index","ProductCategory", new {idCategory = item.id})">@item.name</a>
+                                }
+
+
+                            </div>
+                             }
+                        </div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><b>KHUYỄN MÃI</b></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link " href="#"><b>KIẾN THỨC</b></a>
+                        <div class="dropdown-content2">
+                            <a class="dropdown-item" href="#">Kiến thức áo khoác</a>
+                            <a class="dropdown-item" href="#">Kiến thức áo thu đông</a>
+                            <a class="dropdown-item" href="#">kiến thức tổng quan</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><b>GÓC REVIEW</b></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#"><b>GIỚI THIỆU</b></a>
+                        <div class="dropdown-content2">
+                            <a class="dropdown-item" href="#">Giới thiệu tổng quan</a>
+                            <a class="dropdown-item" href="#">Hướng dẫn đặt hàng</a>
+                            <a class="dropdown-item" href="#">Trờ thành thành viên</a>
+                            <a class="dropdown-item" href="#">Chính sách đổi hàng</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- End Header -->

@@ -1,0 +1,97 @@
+﻿@model ShopQuanAo.Models.UserDTO
+@{
+
+    ViewBag.Title = "ShopQuanAo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<head>
+    <title>Title</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="~/Content/CSS/Home/index.css">
+    <link rel="stylesheet" href="~/Scripts/fontawesome-free-6.0.0-web/css/all.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/CSS/responsive.css">
+</head>
+
+<body>
+    <!-- breadcrumb -->
+    <div class="container color-br">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">@Html.ActionLink("Trang Chủ", "Index", "Home")</li>
+
+            <li class="breadcrumb-item active" aria-current="page">Đăng Nhập, Đăng Kí</li>
+        </ol>
+    </div>
+    <!--End breadcrumb -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                @using (@Html.BeginForm("UserLogin", "Login", FormMethod.Post))
+                {
+                    <h4 class="title-1 title-border text-uppercase mb-30">Đăng nhập</h4>
+                    <p class="text-gray">Nếu khách hàng đã có tài khoản, hãy đăng nhập!</p>
+                    @Html.TextBoxFor(m => m.SDT, "", new { @id = "sdt_login", @placeholder = "Số Điện Thoại" })
+                    @Html.TextBoxFor(m => m.PASSWORD, "", new { @id = "pass-login", @placeholder = "Mật khẩu" })
+                    <button type="submit" data - text="Đăng nhập" class="button-one submit-button mt-15">Đăng nhập</button>
+
+                }
+                @*<form class="form-horizontal">
+                    <div class="customer-login text-left">
+                        <h4 class="title-1 title-border text-uppercase mb-30">Đăng nhập</h4>
+                        <p class="text-gray">Nếu khách hàng đã có tài khoản, hãy đăng nhập!</p>-->
+                        <input id="sdt_login" placeholder="Số điện thoại" required="required" name="phone" type="text">
+                        <input id="pass-login" placeholder="Mật khẩu" required="required" name="password" type="password">
+                        <p><a href="">Quên mật khẩu?</a></p>
+                        <p><a href="">Quên mật khẩu?</a></p>
+
+                    </div>
+
+                </form>*@
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                @using (@Html.BeginForm("UserRegister", "Login", FormMethod.Post))
+                {
+                    <h4 class="title-1 title-border text-uppercase mb-30">Khách hàng mới</h4>
+                    <p class="text-gray">Nếu bạn mới ghé thăm shop, hãy để lại thông tin nhé!</p>
+                    @Html.TextBoxFor(m => m.NAME, "", new { @id = "name-Register", @placeholder = "Họ và tên" })
+                    @Html.TextBoxFor(m => m.SDT, "", new { @id = "sdt_Register", @placeholder = "Số Điện Thoại" })
+                    @Html.TextBoxFor(m => m.PASSWORD, "", new { @id = "pass-Register", @placeholder = "Mật khẩu" })
+                    <button type="submit" data - text="Đăng kí" class="button-one submit-button mt-15">Đăng kí</button>
+
+                }
+                @*<form class="form-horizontal">
+                    <input name="_token" type="hidden" value="Jqu0pThp4CvMqWBVvHxyTExrfPzjPhfRiIFlFkDn">
+                    <div class="customer-register text-left">
+                        <h4 class="title-1 title-border text-uppercase mb-30">Khách hàng mới</h4>
+                        <p class="text-gray">Nếu bạn mới ghé thăm shop, hãy để lại thông tin nhé!</p>
+                        <input placeholder="Họ và tên" required="required" name="name" type="text">
+                        <input placeholder="Số điện thoại" required="required" name="phone" type="text">
+                        <input placeholder="Mật khẩu (tối thiểu 6 kí tự)" required="required" name="password" type="password">
+                        <input placeholder="Xác nhận mật khẩu" required="required" name="password_confirmation" type="password">
+                        <p class="mb-0">
+                            <input type="checkbox" id="newsletter" name="newsletter" checked="">
+                            <label for="newsletter"><span>Chấp nhận <a href="#">điều khoản</a>!</span></label>
+                        </p>
+                        <button type="button" data-text="Đăng ký" class="button-one submit-button mt-15">Đăng ký</button>
+                    </div>
+                </form>*@
+            </div>
+        </div>
+        <input class="hidden" id="urllogin" value="@Url.Action("UserLogin","Login")" style="display: none" />
+        <input class="hidden" id="urlregister" value="@Url.Action("UserRegister","Login")" style="display: none" />
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="~/Content/JS/Login/Login.js"></script>
+</body>

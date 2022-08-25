@@ -1,0 +1,166 @@
+﻿@model List<ShopQuanAo.Models.CartDto>
+
+@{
+
+    ViewBag.Title = "ShopQuanAo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<head>
+    <title>Title</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="~/Content/CSS/Home/index.css">
+    <link rel="stylesheet" href="~/Scripts/fontawesome-free-6.0.0-web/css/all.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/CSS/responsive.css">
+</head>
+
+<body>
+
+    <!-- breadcrumb -->
+    <div class="container color-br">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">@Html.ActionLink("Trang Chủ", "Index", "Home")</li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Productcategory", new {idCategory = 1})">Sản Phẩm</a></li>
+
+            <li class="breadcrumb-item active" aria-current="page">Giỏ Hàng</li>
+        </ol>
+    </div>
+    <!--End breadcrumb -->
+    @if (Model == null || Model.Count == 0)
+    {
+        <p class="text-info text-center">
+            Giỏ hàng của bạn rỗng!
+        </p>
+    }
+    else
+    {
+
+      <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="shopping-cart">
+                    <!-- shopping-cart start -->
+                    <div class="tab-pane" id="shopping-cart">
+                        <form method = "POST" action="https://aothudong.com/dat-hang/thanh-toan" accept-charset="UTF-8" class="frm-checkout">
+                            <input name = "_token" type="hidden" value="ULyAmk4BT2WcszNXntQFcJ4PtiJ3srYlbekv8VP4">
+                            <div class="shop-cart-table">
+                                <div class="table-content table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Sản phẩm</th>
+                                                <th>Giá bán</th>
+                                                <th>Số lượng</th>
+                                                <th>Tổng tiền</th>
+                                                <th>Loại bỏ</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="shopping-items">
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr class="single-cart item-code-ATD-094" data-code="ATD-094">
+                                                    <td class="product-thumbnail text-left" style="background-color: #fff;">
+                                                        <!-- Single-product start -->
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href = "#" ><img src="@item.Hinh" style="width: 50%; height: auto;"></a>
+                                                            </div>
+                                                            <div class="product-info">
+                                                                <h4 class="post-title"><a class="text-light-black" href="@Url.Action("Index", "ProductDetail", new { productId = item.SanPhamID })">@item.TenSanPham</a></h4>
+                                                            </div>
+                                                            
+                                                            
+                                                        </div>
+                                                        <!-- Single-product end -->
+                                                    </td>
+                                                    <td class="product-price" data-value="850000">@item.DonGia</td>
+                                                    <td class="product-quantity">
+                                                        <div class="cart-plus-minus">
+                                                            <span>@item.SoLuong</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="product-subtotal">@item.ThanhTien</td>
+                                                    <td class="product-remove">
+                                                        <a class="btn-del-item" href="@Url.Action("XoaKhoiGio", "Cart", new { SanPhamID = item.SanPhamID })"><i class="fa-solid fa-xmark"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- shopping-cart end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row" style="margin-top: 50px;">
+            <div class="col-md-6 col-sm-6 col-12">
+                <div class="customer-login mt-30">
+                    <h5 class="title-1 title-border text-uppercase">Thông tin khách hàng</h5>
+                    <p class="text-gray">Hãy nhập nhập chính xác thông tin liên hệ và nơi nhận hàng của bạn!</p>
+                    <input class="inp" name="name" value="" type="text" minlength="2" placeholder="Họ và tên" required="">
+                    <input class="inp" name="phone" value="" minlength="10" type="text" placeholder="Số điện thoại" required="">
+                    <input class="inp" name="address" value="" type="text" minlength="10" placeholder="Địa chỉ nhận hàng" required="">
+                    <textarea name = "note" class="custom-textarea" placeholder="Chiều cao, cân nặng, hoặc size bạn thường mặc ..."></textarea>
+
+                    <button class="button-one submit-button mt-15" id="btn-order" data-text="Đặt hàng" type="submit">Đặt hàng</button>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-12">
+                <div class="customer-login payment-details mt-30">
+                    <h4 class="title-1 title-border text-uppercase">Chi tiết thanh toán</h4>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="text-left">Tổng sản phẩm</td>
+                                <td class="text-right"><span class="order-cart">850.000 Đ</span></td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Phương thức thanh toán</td>
+                                <td class="text-left">
+                                    <span>
+                                        <label><input type = "radio" name="payment_method" checked="" value="1"> Thanh toán COD</label>
+                                        <label><input type = "radio" name="payment_method" value="2"> Chuyển khoản trước</label>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Phí ship(tạm tính)</td>
+                                <td class="text-right"><span>30,000</span> Đ</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Tổng đơn hàng</td>
+                                <td class="text-right"><span class="order-total">880.000 Đ</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input name = "total" class="order-total-val" type="hidden" value="850000">
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="~/Content/JS/ProductDetail/JavaScript.js"></script>
+</body>
+
+
+

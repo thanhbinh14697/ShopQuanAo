@@ -1,0 +1,37 @@
+﻿@model ShopQuanAo.Models.ProductCategoryViewModel
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model.Products)
+{
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-top: 50px;">
+        <div class="prduct-ct" >
+            <div class="single-pr">
+                <a href="@Url.Action("Index","ProductDetail", new {productId = item.Id})" >
+                    <img src="@item.IMAGELINK">
+                </a>
+                <span class="" style="position: absolute; bottom: 3px; left: 5px; color: #fff; font-size: 13px; text-shadow: 0 0 5px #ffae3e;">
+                    <i style="color: #ffae3e;" class="zmdi zmdi-star"></i> Đã đặt 31
+                </span>
+                <span class="" style="position: absolute; bottom: 3px; right: 5px; color: #fff; font-size: 13px; text-shadow: 0 0 5px #E91E63;">
+                    <i style="color: #e03550;" class="zmdi zmdi-favorite"></i>@item.LIKES thích
+                </span>
+            </div>
+            <div class="product-info clearfix text-center">
+                <div class="fix">
+                    <h4 class="post-title">
+                        <a class="product-name" href="" >@item.NAMEPRODUCT</a>
+                    </h4>
+                </div>
+            </div>
+            <div class="fix pro-price product-price">
+                @item.PRICE Đ
+            </div>
+        </div>
+    </div>
+
+}
+
+
+

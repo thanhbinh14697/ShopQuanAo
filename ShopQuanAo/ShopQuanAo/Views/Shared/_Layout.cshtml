@@ -1,0 +1,84 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    @{
+        Html.RenderAction("RenderMenu", "Home");
+    }
+    <div>
+        @RenderBody()
+        <hr />
+        <!-- Footer  -->
+        <div class="footerw">
+            <div class="container hihi">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="single-footer">
+                            <h3 class="footer-title  title-border">Thông tin</h3>
+                            <ul class="footer-contact">
+                                <li><span>Địa chỉ:</span>Số 463 Phúc Diễn, Xuân Phương, Từ Liêm, Hà Nội</li>
+                                <li><span>Điện thoại:</span><a href="tel:0854192429">085.419.2429</a></li>
+                                <li>
+                                    <span>Email:</span><a href="mailto:admin@aothudong.com">admin@aothudong.com</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-2 col-sm-6 col-6">
+                        <div class="single-footer">
+                            <h3 class="footer-title  title-border">Danh mục</h3>
+                            <ul class="footer-menu">
+                                <li><i class="fa-solid fa-circle-check"></i><a href="https://aothudong.com/san-pham/danh-muc-1/ao-khoac-gio-nam.html">Áo khoác gió nam</a></li>
+                                <li><a href="https://aothudong.com/san-pham/danh-muc-2/ao-khoac-bo-nam.html"><i class="fa-solid fa-circle-check"></i>Áo khoác bò nam</a></li>
+                                <li><a href="https://aothudong.com/san-pham/danh-muc-3/ao-khoac-kaki-nam.html"><i class="fa-solid fa-circle-check"></i>Áo khoác kaki nam</a></li>
+                                <li><a href="https://aothudong.com/san-pham/danh-muc-9/ao-khoac-phao-nam.html"><i class="fa-solid fa-circle-check"></i>Áo khoác phao nam</a></li>
+                                <li><a href="https://aothudong.com/san-pham/danh-muc-8/ao-khoac-long-vu.html"><i class="fa-solid fa-circle-check"></i>Áo khoác lông vũ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6 col-6">
+                        <div class="single-footer">
+                            <h3 class="footer-title  title-border">Liên kết</h3>
+                            <ul class="footer-menu">
+                                <li><a href="https://aothudong.com/san-pham/moi-nhat" class="a"><i class="fa-solid fa-circle-check"></i>Sản phẩm mới nhập</a></li>
+                                <li><a href="https://aothudong.com/san-pham/hot-nhat"><i class="fa-solid fa-circle-check"></i>Sản phẩm hot nhất</a></li>
+                                <li><a href="https://aothudong.com/san-pham/khuyen-mai"><i class="fa-solid fa-circle-check"></i>Sản phẩm giảm giá</a></li>
+                                <li><a href="https://aothudong.com/san-pham/nhan-dat-hang"><i class="fa-solid fa-circle-check"></i>Sản phẩm hết hàng</a></li>
+                                <li><a href="https://aothudong.com/san-pham/dung-nhap-hang"><i class="fa-solid fa-circle-check"></i>Sản phẩm dừng nhập</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="single-footer">
+                            @if (@Session["idUser"] != null)
+                            {
+                                <h3 class="footer-title  title-border">@Session["Name"]</h3>
+                                <a href="@Url.Action("Logout", "Login")" class="btn btn-danger login-btn-4">Đăng xuất</a>
+                            }
+                            else
+                            {
+                                <div class="footer-subscribe">
+                                    <form action="#">
+                                        <div class="btn-logi">
+                                            <a href="@Url.Action("Login", "Login")" class="btn btn-danger login-btn-4">Đăng nhập</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Footer  -->
+    </div>
+</body>
+</html>
+
+@Scripts.Render("~/bundles/jquery");

@@ -1,0 +1,183 @@
+﻿@model  List<ShopQuanAo.Models.ProductCategoryDto>
+<div class="col-lg-3 col-12" style="background-color: #f6f6f6;">
+
+    <!-- Widget-Search start -->
+
+    <aside class="widget widget-search mb-30">
+        <input name="keySearch" type="text" value="" placeholder="Tìm sản phẩm ..." class="searchpr">
+        <button id="search-prod" onclick="Search()" type="button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </aside>
+
+    <aside class="widget widget-categories mb-30">
+        <div class="widget-title">
+            <h5><b>Danh mục</b> </h5>
+            <div class="kengang" style="margin-top: 5px; width: 100%; margin-left: -15px;"></div>
+        </div>
+        <div id="cat-treeview" class="widget-info product-cat boxscrol2" tabindex="1" style="overflow: hidden; outline: none;">
+
+            <div id="cat-treeview" class="widget-info product-cat boxscrol2" tabindex="1" style="overflow: hidden; outline: none;">
+                <ul class="treeview">
+                    @{
+                        int colSize = 3;
+                        int numCol = Model.Count / colSize;
+                        if (Model.Count % colSize > 0) { numCol++; };
+                    }
+                    @for (int i = 0; i < numCol; i++)
+                    {
+                        var listData = Model.Skip(i * colSize).Take(colSize);
+                        <li class="open collapsable">
+                            <div class="hitarea open-hitarea collapsable-hitarea"></div>
+                            <span>
+                                <a href="https://aothudong.com/san-pham/noi-bat/ao-khoac-mong.html"> <b>Áo khoác mỏng</b> </a>
+                            </span>
+                            <ul class="treeview">
+                                @foreach (var item in listData)
+                                {
+                                    <li><a href="@Url.Action("Index", "ProductCategory", new { idCategory = item.id })">@item.name</a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+        </div>
+    </aside>
+    <ul class="shop-policy">
+        <li>
+            <div><i class="fa-solid fa-truck-moving"></i> Giao hàng<br> Toàn Quốc</div>
+        </li>
+        <li>
+            <div><i class="fa-solid fa-dollar-sign"></i> Thanh toán khi<br> Nhận hàng</div>
+        </li>
+        <li>
+            <div><i class="fa-solid fa-arrows-rotate"></i> Đổi hàng<br>trong 5 ngày</div>
+        </li>
+    </ul>
+    <aside class="widget widget-product mb-30">
+        <div class="widget-title">
+            <h5><b>Sản phẩm liên quan</b></h5>
+            <div class="kengang" style="margin-top: 5px; width: 100%; margin-left: -15px;"></div>
+        </div>
+        <div class="widget-info sidebar-product clearfix">
+
+            @{
+                Html.RenderAction("RenderSideBar", "ProductDetail");
+            }
+
+            <div class="text-right instructor-content">
+                <a href="/san-pham">Xem thêm</a>
+            </div>
+        </div>
+    </aside>
+    <aside class="widget widget-product mb-30">
+        <div class="widget-title">
+            <h5><b>Bài viết mới nhất</b></h5>
+            <div class="kengang" style="margin-top: 5px; width: 100%; margin-left: -15px;"></div>
+        </div>
+        <div class="widget-info sidebar-product clearfix">
+            <!-- Single-product start -->
+            <div class="single-product col-lg-12">
+                <div class="product-img">
+                    <a href="https://aothudong.com/kien-thuc/964/xu-ly-ao-dinh-keo-bay-chuot-don-gian-hieu-qua-sach-vuot-troi.html" title="Xử lý áo dính keo bẫy chuột đơn giản, hiệu quả sạch vượt trội">
+                        <img src="https://aothudong.com/upload/article/thumb/ao-bi-son-vai-nguyen-nhan-va-cach-xu-ly-don-gian-hieu-qua_x360.png" alt="Xử lý áo dính keo bẫy chuột đơn giản, hiệu quả sạch vượt trội">
+                    </a>
+                </div>
+                <div class="product-info">
+                    <h4 class="post-title">
+                        <a href="https://aothudong.com/kien-thuc/964/xu-ly-ao-dinh-keo-bay-chuot-don-gian-hieu-qua-sach-vuot-troi.html" title="Xử lý áo dính keo bẫy chuột đơn giản, hiệu quả sạch vượt trội">Xử lý áo dính keo bẫy chuột đơn giản, hiệu quả sạch vượt trội</a>
+                    </h4>
+                    <span><a class="text-gray" href="#"><i class="fa-solid fa-heart"></i> 170 lượt xem</a></span>
+                </div>
+            </div>
+            <!-- Single-product end -->
+            <!-- Single-product start -->
+            <div class="single-product col-lg-12">
+                <div class="product-img">
+                    <a href="https://aothudong.com/kien-thuc/958/ao-bi-son-vai-nguyen-nhan-va-cach-xu-ly-don-gian-hieu-qua.html" title="Áo bị sờn vải: Nguyên nhân và cách xử lý đơn giản, hiệu quả">
+                        <img src="https://aothudong.com/upload/article/thumb/cach-phoi-do-voi-ao-ni-nam-don-gian-chuan-phong-cach-thoi-trang_x360.png" alt="Áo bị sờn vải: Nguyên nhân và cách xử lý đơn giản, hiệu quả">
+                    </a>
+                </div>
+                <div class="product-info">
+                    <h4 class="post-title">
+                        <a href="https://aothudong.com/kien-thuc/958/ao-bi-son-vai-nguyen-nhan-va-cach-xu-ly-don-gian-hieu-qua.html" title="Áo bị sờn vải: Nguyên nhân và cách xử lý đơn giản, hiệu quả">Áo bị sờn vải: Nguyên nhân và cách xử lý đơn giản, hiệu quả</a>
+                    </h4>
+                    <span><a class="text-gray" href="#"><i class="fa-solid fa-heart"></i> 258 lượt xem</a></span>
+                </div>
+            </div>
+            <!-- Single-product end -->
+            <!-- Single-product start -->
+            <div class="single-product col-lg-12">
+                <div class="product-img">
+                    <a href="https://aothudong.com/kien-thuc/956/cach-phoi-do-voi-ao-ni-nam-don-gian-chuan-phong-cach-thoi-trang.html" title="Cách phối đồ với áo nỉ nam đơn giản chuẩn phong cách thời trang!">
+                        <img src="https://aothudong.com/upload/article/thumb/cach-tay-quan-ao-dinh-cafe-don-gian-hieu-qua-vuot-troi_x360.png" alt="Cách phối đồ với áo nỉ nam đơn giản chuẩn phong cách thời trang!">
+                    </a>
+                </div>
+                <div class="product-info">
+                    <h4 class="post-title">
+                        <a href="https://aothudong.com/kien-thuc/956/cach-phoi-do-voi-ao-ni-nam-don-gian-chuan-phong-cach-thoi-trang.html" title="Cách phối đồ với áo nỉ nam đơn giản chuẩn phong cách thời trang!">Cách phối đồ với áo nỉ nam đơn giản chuẩn phong cách thời trang!</a>
+                    </h4>
+                    <span><a class="text-gray" href="#"><i class="fa-solid fa-heart"></i> 393 lượt xem</a></span>
+                </div>
+            </div>
+            <!-- Single-product end -->
+            <!-- Single-product start -->
+            <div class="single-product col-lg-12">
+                <div class="product-img">
+                    <a href="https://aothudong.com/kien-thuc/952/cach-tay-quan-ao-dinh-cafe-don-gian-hieu-qua-vuot-troi.html" title="Cách tẩy quần áo dính cafe đơn giản, hiệu quả vượt trội">
+                        <img src="https://aothudong.com/upload/article/thumb/cach-tay-quan-ao-dinh-cafe-don-gian-hieu-qua-vuot-troi_x360.png" alt="Cách tẩy quần áo dính cafe đơn giản, hiệu quả vượt trội">
+                    </a>
+                </div>
+                <div class="product-info">
+                    <h4 class="post-title">
+                        <a href="https://aothudong.com/kien-thuc/952/cach-tay-quan-ao-dinh-cafe-don-gian-hieu-qua-vuot-troi.html" title="Cách tẩy quần áo dính cafe đơn giản, hiệu quả vượt trội">Cách tẩy quần áo dính cafe đơn giản, hiệu quả vượt trội</a>
+                    </h4>
+                    <span><a class="text-gray" href="#"><i class="fa-solid fa-heart"></i> 193 lượt xem</a></span>
+                </div>
+            </div>
+            <!-- Single-product end -->
+            <!-- Single-product start -->
+            <div class="single-product col-lg-12">
+                <div class="product-img">
+                    <a href="https://aothudong.com/kien-thuc/949/xu-ly-quan-ao-dinh-keo-dan-ong-nuoc-don-gian-sach-tuc-thi.html" title="Xử lý quần áo dính keo dán ống nước đơn giản, sạch tức thì">
+                        <img src="https://aothudong.com/upload/article/thumb/xu-ly-quan-ao-dinh-keo-dan-ong-nuoc-don-gian-sach-tuc-thi_x360.png" alt="Xử lý quần áo dính keo dán ống nước đơn giản, sạch tức thì">
+                    </a>
+                </div>
+                <div class="product-info">
+                    <h4 class="post-title">
+                        <a href="https://aothudong.com/kien-thuc/949/xu-ly-quan-ao-dinh-keo-dan-ong-nuoc-don-gian-sach-tuc-thi.html" title="Xử lý quần áo dính keo dán ống nước đơn giản, sạch tức thì">Xử lý quần áo dính keo dán ống nước đơn giản, sạch tức thì</a>
+                    </h4>
+                    <span><a class="text-gray" href="#"><i class="fa-solid fa-heart"></i> 222 lượt xem</a></span>
+                </div>
+            </div>
+            <!-- Single-product end -->
+            <!-- Single-product start -->
+            <div class="single-product col-lg-12">
+                <div class="product-img">
+                    <a href="https://aothudong.com/kien-thuc/946/cach-khac-phuc-ao-khoac-du-bi-nhan-hieu-qua-tai-nha.html" title="Cách khắc phục áo khoác dù bị nhăn hiệu quả tại nhà">
+                        <img src="https://aothudong.com/upload/article/thumb/cach-khac-phuc-ao-khoac-du-bi-nhan-hieu-qua-tai-nha_x360.png" alt="Cách khắc phục áo khoác dù bị nhăn hiệu quả tại nhà">
+                    </a>
+                </div>
+                <div class="product-info">
+                    <h4 class="post-title">
+                        <a href="https://aothudong.com/kien-thuc/946/cach-khac-phuc-ao-khoac-du-bi-nhan-hieu-qua-tai-nha.html" title="Cách khắc phục áo khoác dù bị nhăn hiệu quả tại nhà">Cách khắc phục áo khoác dù bị nhăn hiệu quả tại nhà</a>
+                    </h4>
+                    <span><a class="text-gray" href="#"><i class="fa-solid fa-heart"></i> 220 lượt xem</a></span>
+                </div>
+            </div>
+            <!-- Single-product end -->
+            <div class="text-right instructor-content">
+                <a href="/kien-thuc">Xem thêm</a>
+            </div>
+        </div>
+    </aside>
+    <aside class="widget widget-banner">
+        <div class="widget-info widget-banner-img">
+            <a href="https://aothudong.com/san-pham/khuyen-mai"><img src="https://aothudong.com/theme/img/pages/sale-off-2.jpg" alt="Thông tin khuyến mại tại Aothudong" style="width: 100%;"></a>
+        </div>
+    </aside>
+
+</div>
+
